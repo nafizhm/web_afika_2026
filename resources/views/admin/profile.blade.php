@@ -7,7 +7,8 @@
 <section class="panel"><div class="panel-heading"><div><h2>Informasi perusahaan</h2><p>Nama dan kontak digunakan pada identitas serta bagian kontak website.</p></div></div>
 <div class="form-grid">
 <label class="full" for="company_name">Nama perusahaan<input id="company_name" name="company_name" required maxlength="200" value="{{ old('company_name',$settings->get('company_name','PT. Sahir Propertindo Niaga')) }}" placeholder="PT. Sahir Propertindo Niaga"></label>
-<label for="phone">Nomor telepon<input id="phone" name="phone" type="tel" maxlength="40" value="{{ old('phone',$settings->get('phone')) }}" placeholder="082221992911"><small>Nomor kontak perusahaan. Nomor WhatsApp tetap di menu Konten Website.</small></label>
+<label for="phone">Nomor telepon<input id="phone" name="phone" type="tel" maxlength="40" value="{{ old('phone',$settings->get('phone')) }}" placeholder="082221992911"></label>
+<label for="whatsapp">No WA CS<input id="whatsapp" name="whatsapp" type="tel" maxlength="30" value="{{ old('whatsapp',$settings->get('whatsapp')) }}" placeholder="6281234567890"><small>Nomor tujuan semua tombol WhatsApp website.</small></label>
 <label for="email">Email perusahaan<input id="email" name="email" type="email" maxlength="255" value="{{ old('email',$settings->get('email')) }}" placeholder="info@perusahaan.com"></label>
 <label class="full" for="address">Alamat perusahaan<textarea id="address" name="address" rows="3" maxlength="2000" placeholder="Alamat lengkap kantor pemasaran">{{ old('address',$settings->get('address')) }}</textarea></label>
 </div></section>

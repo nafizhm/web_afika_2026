@@ -220,7 +220,7 @@ function afikaFaqContext(PDO $pdo, string $question): array
     $words=array_filter(array_unique($words),fn($word)=>mb_strlen($word)>2 && !in_array($word,['apa','yang','dan','atau','saya','aku','kamu','anda','untuk','dengan','bagaimana','apakah','bisa','mau','ingin'],true));
     $ranked=[];
     foreach($rows as $row) {
-        if (($row['faq_type'] ?? 'general') !== 'general') continue;
+        if (($row['faq_type'] ?? 'general') !== 'general' || (isset($row['is_ai']) && !(bool)$row['is_ai'])) continue;
         // Draft placeholders must not be quoted as actual business facts.
         if (preg_match('/\[[^\]]+\]/u',$row['question'].' '.$row['answer'])) continue;
         $text=mb_strtolower($row['question'].' '.$row['answer']);
@@ -243,6 +243,7 @@ function afikaAssistantProfile(PDO $pdo): array
     $profile=['name'=>'Fika','handoff'=>'Admin kami akan mengambil alih obrolan ini pada jam kerja. Kakak tidak perlu menghubungi nomor lain.'];
     $seen=[];
     foreach ($pdo->query('SELECT * FROM faqs WHERE is_active=1 ORDER BY sort_order,id LIMIT 100')->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        if (isset($row['is_ai']) && !(bool)$row['is_ai']) continue;
         $type=$row['faq_type']??'general';
         if (isset($seen[$type]) || trim($row['answer'])==='') continue;
         if ($type==='identity') $profile['name']=mb_substr(trim($row['answer']),0,60);
@@ -374,7 +375,19 @@ if ($method !== 'POST') {
 }
 if (($_GET['worker'] ?? '') === '1') {
     $authorization = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-    if (!afikaRemoteAuthorized($authorization,$workerToken)) afikaReply(401,['ok'=>false,'error'=>'Worker unauthorized or token not configured.']);
+    if (!afikaRemoteAuthorized($authorization,$workerToken)) {
+        // Diagnostic flags only: never log tokens, hashes, or authorization values.
+        error_log('Afika worker authorization check: '.json_encode([
+            'config_file_loaded'=>is_file($configFile),
+            'private_env_readable'=>isset($privateEnv) && is_readable($privateEnv),
+            'autoload_readable'=>isset($autoload) && is_readable($autoload),
+            'env_worker_token_defined'=>isset($envValues) && array_key_exists('WA_AI_WORKER_TOKEN',$envValues),
+            'worker_token_valid_length'=>strlen($workerToken)>=32,
+            'authorization_received'=>$authorization!=='',
+            'authorization_bearer_prefix'=>str_starts_with($authorization,'Bearer '),
+        ]));
+        afikaReply(401,['ok'=>false,'error'=>'Worker unauthorized or token not configured.']);
+    }
     if (!$aiConfig['enabled'] || ($aiConfig['worker_mode']??'cron')!=='remote') afikaReply(409,['ok'=>false,'error'=>'Remote worker is disabled.']);
     try {
         $rawInput=file_get_contents('php://input',false,null,0,2097153);

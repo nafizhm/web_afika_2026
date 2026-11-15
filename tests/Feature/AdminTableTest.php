@@ -46,7 +46,7 @@ class AdminTableTest extends TestCase
         $this->seed();
         $this->actingAs(User::first());
         foreach(['/admin','/admin/properti','/admin/faq','/admin/pesan-whatsapp','/admin/konten','/admin/akun'] as $url) {
-            $this->get($url)->assertOk()->assertSee('admin-sidebar')->assertSee('Konten Website');
+            $this->get($url)->assertOk()->assertSee('admin-sidebar')->assertSee('Tampilan Website');
         }
         $this->getJson('/admin/tables/properties')->assertOk()->assertSee('_token')->assertSee('DELETE');
     }

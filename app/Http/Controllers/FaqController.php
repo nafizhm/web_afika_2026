@@ -10,13 +10,14 @@ class FaqController extends Controller
     public function index(Request $request)
     {
         $search = $request->validate(['q' => 'nullable|string|max:200'])['q'] ?? '';
-        $faqs = Faq::query()
+        $audience = $request->validate(['audience'=>'nullable|in:ai,web,both'])['audience'] ?? '';
+        $faqs = Faq::query()->audience($audience)
             ->when($search !== '', fn ($query) => $query->where(fn ($q) => $q
                 ->where('question', 'like', '%'.$search.'%')
                 ->orWhere('answer', 'like', '%'.$search.'%')))
             ->orderBy('sort_order')->orderByDesc('id')->paginate(15)->withQueryString();
 
-        return view('admin.faq.index', compact('faqs', 'search'));
+        return view('admin.faq.index', compact('faqs', 'search', 'audience'));
     }
 
     public function create() { return view('admin.faq.form', ['faq' => new Faq(['is_active' => true, 'sort_order' => 0, 'is_public'=>true, 'faq_type'=>'general'])]); }
@@ -46,8 +47,10 @@ class FaqController extends Controller
         $data = $request->validate([
             'faq_type'=>'sometimes|required|in:general,identity,handoff',
             'is_public'=>'sometimes|required|boolean',
+            'audience'=>'sometimes|required|in:ai,web,both',
             'faq_type'=>'sometimes|required|in:general,identity,handoff',
             'is_public'=>'sometimes|required|boolean',
+            'audience'=>'sometimes|required|in:ai,web,both',
             'question' => 'required|string|max:500',
             'answer' => 'required|string|max:20000',
             'sort_order' => 'required|integer|min:0|max:999999',

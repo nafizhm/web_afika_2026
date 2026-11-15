@@ -6,6 +6,8 @@ Route::get('/properti/{property}',[WebsiteController::class,'show'])->name('prop
 Route::get('/admin/login',[AdminController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminController::class,'authenticate'])->middleware('throttle:5,1')->name('login.submit');
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::get('/tampilan-website',[\App\Http\Controllers\WebsiteAppearanceController::class,'edit'])->name('appearance');
+Route::put('/tampilan-website',[\App\Http\Controllers\WebsiteAppearanceController::class,'update'])->name('appearance.update');
 Route::get('/pengaturan-ai',[\App\Http\Controllers\AiSettingsController::class,'edit'])->name('ai-settings');
 Route::put('/pengaturan-ai',[\App\Http\Controllers\AiSettingsController::class,'update'])->middleware('throttle:10,1')->name('ai-settings.update');
 Route::get('/profil', [\App\Http\Controllers\CompanyProfileController::class,'edit'])->name('profile');

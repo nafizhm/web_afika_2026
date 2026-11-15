@@ -16,9 +16,15 @@ class CompanyProfileController extends Controller
 
     public function update(Request $request)
     {
+        if ($request->has('whatsapp') && is_string($request->input('whatsapp'))) {
+            $number=preg_replace('/[\s()+-]+/', '', $request->input('whatsapp'));
+            if (str_starts_with($number,'0')) $number='62'.substr($number,1);
+            $request->merge(['whatsapp'=>$number]);
+        }
         $data=$request->validate([
             'company_name'=>'required|string|max:200',
             'address'=>'nullable|string|max:2000',
+            'whatsapp'=>'nullable|regex:/^[1-9][0-9]{8,14}$/',
             'phone'=>'nullable|string|max:40|regex:/^[0-9+().\s-]+$/',
             'email'=>'nullable|email|max:255',
             'google_maps_embed'=>'nullable|string|max:15000',

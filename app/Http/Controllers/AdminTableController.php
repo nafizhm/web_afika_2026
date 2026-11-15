@@ -10,6 +10,7 @@ class AdminTableController extends Controller
     public function __invoke(Request $request, string $type)
     {
         $request->validate([
+            'audience'=>'nullable|in:ai,web,both',
             'draw'=>'nullable|integer|min:0', 'start'=>'nullable|integer|min:0',
             'length'=>'nullable|integer|min:1|max:100', 'search.value'=>'nullable|string|max:500',
             'order.0.column'=>'nullable|integer|min:0|max:10', 'order.0.dir'=>'nullable|in:asc,desc',
@@ -22,6 +23,7 @@ class AdminTableController extends Controller
         };
         $query=$model::query();
         $total=(clone $query)->count();
+        if ($type==='faqs') $query->audience((string)$request->input('audience',''));
         $search=trim((string)$request->input('search.value',''));
         if ($search!=='') $query->where(function ($q) use ($searchable,$search,$type) {
             foreach ($searchable as $column) $q->orWhere($column,'like','%'.$search.'%');
@@ -41,7 +43,7 @@ class AdminTableController extends Controller
             return match ($type) {
                 'properties'=>['name'=>$row->name,'location'=>$row->location,'price'=>$row->price ? 'Rp '.number_format($row->price,0,',','.') : 'Belum diisi',
                     'status'=>$row->is_published?'Tayang':'Draft','actions'=>view('admin.partials.table-actions',['edit'=>route('admin.property.edit',$row),'delete'=>route('admin.property.destroy',$row),'label'=>'properti'])->render()],
-                'faqs'=>['sort_order'=>$row->sort_order,'question'=>$row->question,'answer'=>$row->answer,'status'=>($row->is_active?'Aktif':'Nonaktif').(($row->is_public && $row->faq_type==='general')?' ? Website & AI':' ? Khusus AI'),
+                'faqs'=>['sort_order'=>$row->sort_order,'question'=>$row->question,'answer'=>$row->answer,'status'=>($row->is_active?'Aktif':'Nonaktif').(($row->is_public && $row->faq_type==='general')?($row->is_ai?' / Web & AI':' / Khusus Web'):' / Khusus AI'),
                     'actions'=>view('admin.partials.table-actions',['edit'=>route('admin.faq.edit',$row),'delete'=>route('admin.faq.destroy',$row),'label'=>'FAQ'])->render()],
                 'messages'=>['sender_name'=>$row->sender_name?:'Tanpa nama','sender_phone'=>$row->sender_phone?:$row->sender_jid,
                     'body'=>$row->body??'[Pesan nonteks]','message_type'=>$row->message_type,

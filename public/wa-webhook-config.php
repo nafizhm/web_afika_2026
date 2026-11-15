@@ -36,8 +36,14 @@ $aiConfig = [
     'client_id' => 'cobadong',
 ];
 // Pada project Laravel, baca .env langsung agar key tidak tertimpa environment proses tes.
-$privateEnv = dirname(__DIR__).'/.env';
-$autoload = dirname(__DIR__).'/vendor/autoload.php';
+// Supports public_html separate from the Laravel Git checkout.
+$laravelRoot = dirname(__DIR__);
+$repositoryRoot = dirname(__DIR__).'/repositories/web_afika_2026';
+if (is_file($repositoryRoot.'/.env') && is_file($repositoryRoot.'/vendor/autoload.php')) {
+    $laravelRoot = $repositoryRoot;
+}
+$privateEnv = $laravelRoot.'/.env';
+$autoload = $laravelRoot.'/vendor/autoload.php';
 if (is_file($privateEnv) && is_file($autoload)) {
     require_once $autoload;
     $envValues = \Dotenv\Dotenv::parse(file_get_contents($privateEnv));
