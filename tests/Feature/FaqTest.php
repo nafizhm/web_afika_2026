@@ -59,7 +59,7 @@ class FaqTest extends TestCase
     public function test_sync_sends_faq_snapshot_to_authenticated_hosting_endpoint(): void
     {
         $this->actingAs($this->admin());
-        config(['faq.sync_token'=>str_repeat('x',64),'faq.sync_url'=>'https://hosting.example/wa-webhook-test.php']);
+        config(['faq.shared_database'=>false,'faq.sync_token'=>str_repeat('x',64),'faq.sync_url'=>'https://hosting.example/wa-webhook-test.php']);
         \Illuminate\Support\Facades\Http::fake(['hosting.example/*'=>\Illuminate\Support\Facades\Http::response(['ok'=>true,'count'=>1])]);
         Faq::create(['question'=>'Jam kantor?','answer'=>'08.00–16.00 WIB.','sort_order'=>0,'is_active'=>true]);
         $this->from('/admin/faq')->post('/admin/faq/sync')->assertRedirect('/admin/faq')->assertSessionHas('success');
@@ -71,7 +71,7 @@ class FaqTest extends TestCase
     public function test_sync_failure_keeps_local_faqs_and_shows_error(): void
     {
         $this->actingAs($this->admin());
-        config(['faq.sync_token'=>str_repeat('x',64),'faq.sync_url'=>'https://hosting.example/wa-webhook-test.php']);
+        config(['faq.shared_database'=>false,'faq.sync_token'=>str_repeat('x',64),'faq.sync_url'=>'https://hosting.example/wa-webhook-test.php']);
         \Illuminate\Support\Facades\Http::fake(['hosting.example/*'=>\Illuminate\Support\Facades\Http::response(['ok'=>false],401)]);
         Faq::create(['question'=>'Jam kantor?','answer'=>'08.00–16.00 WIB.','sort_order'=>0,'is_active'=>true]);
         $this->from('/admin/faq')->post('/admin/faq/sync')->assertSessionHasErrors('faq_sync');

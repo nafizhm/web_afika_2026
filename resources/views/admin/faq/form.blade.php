@@ -8,6 +8,8 @@
     <form method="post" action="{{ $faq->exists ? route('admin.faq.update', $faq) : route('admin.faq.store') }}">
         @csrf
         @if($faq->exists) @method('PUT') @endif
+        <label>Jenis FAQ<select name="faq_type">@foreach(['general'=>'Informasi umum','identity'=>'Nama asisten (jawaban: nama saja)','handoff'=>'Pengalihan ke admin'] as $key=>$label)<option value="{{ $key }}" @selected(old('faq_type',$faq->faq_type ?? 'general')===$key)>{{ $label }}</option>@endforeach</select></label>
+        <input type="hidden" name="is_public" value="0"><label class="check"><input type="checkbox" name="is_public" value="1" @checked(old('is_public',$faq->is_public))> Tampilkan di website (informasi umum)</label>
         <label for="question">Pertanyaan<textarea id="question" name="question" rows="2" maxlength="500" required placeholder="Contoh: Bagaimana cara menjadwalkan kunjungan?" autofocus>{{ old('question', $faq->question) }}</textarea></label>
         <label for="answer">Jawaban<textarea id="answer" name="answer" rows="8" maxlength="20000" required placeholder="Tuliskan jawaban resmi perusahaan...">{{ old('answer', $faq->answer) }}</textarea></label>
         <label class="faq-order" for="sort_order">Urutan<input id="sort_order" type="number" name="sort_order" min="0" max="999999" value="{{ old('sort_order', $faq->sort_order) }}" required></label>

@@ -20,7 +20,7 @@ class AiSettingsTest extends TestCase
     public function test_control_reads_hosting_and_confirms_disabled_status(): void
     {
         $this->actingAs(User::factory()->create());
-        config(['faq.sync_url'=>'https://hosting.example/webhook.php','faq.sync_token'=>str_repeat('x',64)]);
+        config(['faq.shared_database'=>false,'faq.sync_url'=>'https://hosting.example/webhook.php','faq.sync_token'=>str_repeat('x',64)]);
         Http::fake(fn($request)=>Http::response(['ok'=>true,'ai_enabled'=>$request['action']==='get_ai_status']));
         $this->get('/admin/pengaturan-ai')->assertOk()->assertSee('AI aktif');
         $this->put('/admin/pengaturan-ai',['enabled'=>0])->assertSessionHasNoErrors()->assertRedirect('/admin/pengaturan-ai');
@@ -31,7 +31,7 @@ class AiSettingsTest extends TestCase
     public function test_remote_failure_does_not_claim_ai_has_been_disabled(): void
     {
         $this->actingAs(User::factory()->create());
-        config(['faq.sync_url'=>'https://hosting.example/webhook.php','faq.sync_token'=>str_repeat('x',64)]);
+        config(['faq.shared_database'=>false,'faq.sync_url'=>'https://hosting.example/webhook.php','faq.sync_token'=>str_repeat('x',64)]);
         Http::fake(['*'=>Http::response(['ok'=>false],503)]);
         $this->get('/admin/pengaturan-ai')->assertOk()->assertSee('Belum terkonfirmasi');
         $this->from('/admin/pengaturan-ai')->put('/admin/pengaturan-ai',['enabled'=>0])->assertSessionHasErrors('ai_control');

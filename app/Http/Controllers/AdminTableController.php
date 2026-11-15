@@ -41,7 +41,7 @@ class AdminTableController extends Controller
             return match ($type) {
                 'properties'=>['name'=>$row->name,'location'=>$row->location,'price'=>$row->price ? 'Rp '.number_format($row->price,0,',','.') : 'Belum diisi',
                     'status'=>$row->is_published?'Tayang':'Draft','actions'=>view('admin.partials.table-actions',['edit'=>route('admin.property.edit',$row),'delete'=>route('admin.property.destroy',$row),'label'=>'properti'])->render()],
-                'faqs'=>['sort_order'=>$row->sort_order,'question'=>$row->question,'answer'=>$row->answer,'status'=>$row->is_active?'Aktif':'Nonaktif',
+                'faqs'=>['sort_order'=>$row->sort_order,'question'=>$row->question,'answer'=>$row->answer,'status'=>($row->is_active?'Aktif':'Nonaktif').(($row->is_public && $row->faq_type==='general')?' ? Website & AI':' ? Khusus AI'),
                     'actions'=>view('admin.partials.table-actions',['edit'=>route('admin.faq.edit',$row),'delete'=>route('admin.faq.destroy',$row),'label'=>'FAQ'])->render()],
                 'messages'=>['sender_name'=>$row->sender_name?:'Tanpa nama','sender_phone'=>$row->sender_phone?:$row->sender_jid,
                     'body'=>$row->body??'[Pesan nonteks]','message_type'=>$row->message_type,

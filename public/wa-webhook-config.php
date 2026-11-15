@@ -41,6 +41,11 @@ $autoload = dirname(__DIR__).'/vendor/autoload.php';
 if (is_file($privateEnv) && is_file($autoload)) {
     require_once $autoload;
     $envValues = \Dotenv\Dotenv::parse(file_get_contents($privateEnv));
+    // Shared Laravel hosting: the .env connection is authoritative.
+    foreach (['DB_HOST'=>'dbHost','DB_PORT'=>'dbPort','DB_DATABASE'=>'dbName','DB_USERNAME'=>'dbUser','DB_PASSWORD'=>'dbPassword',
+        'WHATSAPP_NUMBER'=>'accountNumber','WHATSAPP_WEBHOOK_SECRET'=>'webhookToken'] as $envName=>$variable) {
+        if (array_key_exists($envName,$envValues)) $$variable=$envValues[$envName];
+    }
     foreach (['api_key'=>'KENARI_API_KEY', 'model'=>'KENARI_MODEL', 'base_url'=>'KENARI_BASE_URL',
         'gateway_url'=>'WA_GATEWAY_URL', 'gateway_token'=>'WA_GATEWAY_TOKEN', 'client_id'=>'WA_GATEWAY_CLIENT_ID'] as $field=>$envName) {
         if (isset($envValues[$envName])) $aiConfig[$field] = $envValues[$envName];

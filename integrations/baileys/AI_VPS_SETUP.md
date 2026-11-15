@@ -38,7 +38,7 @@ Upload `.env.afika-ai.example` menjadi:
 Isi file environment ini di VPS:
 
 ```dotenv
-AFIKA_WEBHOOK_URL=https://afika.berkahtech.biz.id/wa-webhook-test.php
+AFIKA_WEBHOOK_URL=https://afikaproperty.com/wa-webhook-test.php
 AFIKA_WORKER_TOKEN=TOKEN_YANG_SAMA_DENGAN_HOSTING
 KENARI_API_KEY=API_KEY_KENARI
 KENARI_MODEL=glm-4-6v-flash:free

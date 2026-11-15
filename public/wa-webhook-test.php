@@ -215,11 +215,12 @@ function afikaFaqSync(PDO $pdo, mixed $faqs): array
 function afikaFaqContext(PDO $pdo, string $question): array
 {
     afikaFaqSchema($pdo);
-    $rows=$pdo->query('SELECT id,question,answer FROM faqs WHERE is_active=1 ORDER BY sort_order,id LIMIT 100')->fetchAll(PDO::FETCH_ASSOC);
+    $rows=$pdo->query('SELECT * FROM faqs WHERE is_active=1 ORDER BY sort_order,id LIMIT 100')->fetchAll(PDO::FETCH_ASSOC);
     $words=preg_split('/[^\p{L}\p{N}]+/u',mb_strtolower($question),-1,PREG_SPLIT_NO_EMPTY);
     $words=array_filter(array_unique($words),fn($word)=>mb_strlen($word)>2 && !in_array($word,['apa','yang','dan','atau','saya','aku','kamu','anda','untuk','dengan','bagaimana','apakah','bisa','mau','ingin'],true));
     $ranked=[];
     foreach($rows as $row) {
+        if (($row['faq_type'] ?? 'general') !== 'general') continue;
         // Draft placeholders must not be quoted as actual business facts.
         if (preg_match('/\[[^\]]+\]/u',$row['question'].' '.$row['answer'])) continue;
         $text=mb_strtolower($row['question'].' '.$row['answer']);
@@ -235,6 +236,20 @@ function afikaFaqContext(PDO $pdo, string $question): array
         if(count($context)>=20) break;
     }
     return $context;
+}
+
+function afikaAssistantProfile(PDO $pdo): array
+{
+    $profile=['name'=>'Fika','handoff'=>'Admin kami akan mengambil alih obrolan ini pada jam kerja. Kakak tidak perlu menghubungi nomor lain.'];
+    $seen=[];
+    foreach ($pdo->query('SELECT * FROM faqs WHERE is_active=1 ORDER BY sort_order,id LIMIT 100')->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        $type=$row['faq_type']??'general';
+        if (isset($seen[$type]) || trim($row['answer'])==='') continue;
+        if ($type==='identity') $profile['name']=mb_substr(trim($row['answer']),0,60);
+        if ($type==='handoff') $profile['handoff']=mb_substr(trim($row['answer']),0,2000);
+        $seen[$type]=true;
+    }
+    return $profile;
 }
 
 function afikaRemoteQueue(PDO $pdo, array $input): array
@@ -290,6 +305,7 @@ function afikaRemoteQueue(PDO $pdo, array $input): array
                 'incoming_text'=>$job['incoming_text'], 'reply_text'=>$job['reply_text'],
                 'is_first_contact'=>(int)$previous->fetchColumn()===0,
                 'faqs'=>$faqContext,
+                'ai_profile'=>afikaAssistantProfile($pdo),
             ]]];
         }
         $id = $input['id'] ?? null; $token = $input['lease_token'] ?? '';

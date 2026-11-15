@@ -19,7 +19,7 @@ class FaqController extends Controller
         return view('admin.faq.index', compact('faqs', 'search'));
     }
 
-    public function create() { return view('admin.faq.form', ['faq' => new Faq(['is_active' => true, 'sort_order' => 0])]); }
+    public function create() { return view('admin.faq.form', ['faq' => new Faq(['is_active' => true, 'sort_order' => 0, 'is_public'=>true, 'faq_type'=>'general'])]); }
 
     public function store(Request $request)
     {
@@ -43,12 +43,21 @@ class FaqController extends Controller
 
     private function validated(Request $request): array
     {
-        return $request->validate([
+        $data = $request->validate([
+            'faq_type'=>'sometimes|required|in:general,identity,handoff',
+            'is_public'=>'sometimes|required|boolean',
+            'faq_type'=>'sometimes|required|in:general,identity,handoff',
+            'is_public'=>'sometimes|required|boolean',
             'question' => 'required|string|max:500',
             'answer' => 'required|string|max:20000',
             'sort_order' => 'required|integer|min:0|max:999999',
             'is_active' => 'required|boolean',
         ]);
+        if (($data['faq_type'] ?? 'general') !== 'general') $data['is_public'] = false;
+        if (($data['faq_type'] ?? '') === 'identity' && mb_strlen($data['answer']) > 60) {
+            throw \Illuminate\Validation\ValidationException::withMessages(['answer'=>'Isi nama asisten saja, maksimal 60 karakter.']);
+        }
+        return $data;
     }
 }
 
