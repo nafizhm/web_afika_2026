@@ -10,6 +10,9 @@ class AiSettingsController extends Controller
 {
     private function remote(array $payload): array
     {
+        if (config('faq.shared_database')) {
+            return app(\App\Services\SharedAiControl::class)->handle($payload);
+        }
         $token=(string)config('faq.sync_token');
         $url=(string)config('faq.sync_url');
         if(strlen($token)<32 || parse_url($url,PHP_URL_SCHEME)!=='https') throw new \RuntimeException('Missing configuration.');
@@ -37,7 +40,7 @@ class AiSettingsController extends Controller
             if($result['ai_enabled']!==$enabled) throw new \RuntimeException('Unconfirmed state.');
             Setting::updateOrCreate(['key'=>'wa_ai_enabled'],['value'=>$enabled?'1':'0']);
         } catch(\Throwable) {
-            return back()->withErrors(['ai_control'=>'Status belum dapat dikonfirmasi oleh hosting. Pastikan webhook terbaru sudah di-upload dan token sesuai. Muat ulang halaman untuk memeriksa status sebenarnya.']);
+            return back()->withErrors(['ai_control'=>config('faq.shared_database') ? 'Status AI belum dapat disimpan. Periksa migration, koneksi database bersama, dan coba kembali.' : 'Status belum dapat dikonfirmasi oleh hosting. Pastikan webhook terbaru sudah di-upload dan token sesuai. Muat ulang halaman untuk memeriksa status sebenarnya.']);
         }
         return redirect()->route('admin.ai-settings')->with('success',$enabled
             ?'Balasan AI aktif. Fika akan menangani pesan baru.'

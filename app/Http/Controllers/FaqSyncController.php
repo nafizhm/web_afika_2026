@@ -9,6 +9,9 @@ class FaqSyncController extends Controller
 {
     public function __invoke()
     {
+        if (config('faq.shared_database')) {
+            return back()->with('success', 'FAQ memakai database bersama. Perubahan langsung tersedia untuk pesan baru tanpa sinkronisasi.');
+        }
         $token = (string) config('faq.sync_token');
         $url = (string) config('faq.sync_url');
         if (strlen($token) < 32 || parse_url($url, PHP_URL_SCHEME) !== 'https') {
