@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\{Property,Setting,Faq};
+
+
 class WebsiteController extends Controller {
  private function settings() {return collect(config('website.defaults'))->merge(Setting::pluck('value','key'));}
  public function index() {
