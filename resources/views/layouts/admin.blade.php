@@ -12,7 +12,7 @@
 @auth
 <div class="sidebar-backdrop" data-sidebar-close hidden></div>
 <aside class="admin-sidebar" id="admin-sidebar" aria-label="Menu utama">
-<a class="sidebar-brand" href="{{ route('admin.index') }}"><img class="sahir-admin-logo" src="{{ ($companyProfile->get('logo') ? asset('storage/'.$companyProfile['logo']) : asset('images/logo-sahir.png')) }}" alt="Logo Sahir"><span><strong>{{ $companyProfile->get('brand_name','AFIKA') }}</strong><small>ADMIN</small></span></a>
+<a class="sidebar-brand" href="{{ route('admin.index') }}"><img class="sahir-admin-logo" width="46" height="46" style="width:46px;height:46px;max-width:46px;max-height:46px;object-fit:contain;flex:0 0 46px" src="{{ ($companyProfile->get('logo') ? asset('storage/'.$companyProfile['logo']) : asset('images/logo-sahir.png')) }}" alt="Logo Sahir"><span><strong>{{ $companyProfile->get('brand_name','AFIKA') }}</strong><small>ADMIN</small></span></a>
 <button class="sidebar-close" data-sidebar-close type="button" aria-label="Tutup menu"><x-admin-icon name="close" /></button>
 <div class="sidebar-label">WORKSPACE</div>
 <nav class="sidebar-menu">
@@ -42,7 +42,7 @@
 <dialog id="logout-confirm" class="logout-dialog" aria-labelledby="logout-title"><div class="logout-dialog-icon"><x-admin-icon name="logout" /></div><h2 id="logout-title">Keluar dari akun?</h2><p>Anda perlu login kembali untuk mengakses halaman admin.</p><div class="logout-dialog-actions"><button type="button" class="dialog-cancel" data-dialog-close>Batal</button><form method="post" action="{{ route('admin.logout') }}">@csrf<button type="submit" class="button">Ya, keluar</button></form></div></dialog>
 <main class="container admin-main">
 @else
-<header class="login-header"><a class="brand" href="{{ route('home') }}"><img class="sahir-admin-logo" src="{{ ($companyProfile->get('logo') ? asset('storage/'.$companyProfile['logo']) : asset('images/logo-sahir.png')) }}" alt="Logo Sahir"><strong>AFIKA RESIDENCE</strong></a><a class="text-link" href="{{ route('home') }}">Kembali ke website &rarr;</a></header>
+<header class="login-header"><a class="brand" href="{{ route('home') }}"><img class="sahir-admin-logo" width="46" height="46" style="width:46px;height:46px;max-width:46px;max-height:46px;object-fit:contain;flex:0 0 46px" src="{{ ($companyProfile->get('logo') ? asset('storage/'.$companyProfile['logo']) : asset('images/logo-sahir.png')) }}" alt="Logo Sahir"><strong>AFIKA RESIDENCE</strong></a><a class="text-link" href="{{ route('home') }}">Kembali ke website &rarr;</a></header>
 <main class="container admin-main">
 @endauth
 @if(session('success'))<div class="alert success" role="status">{{ session('success') }}</div>@endif
