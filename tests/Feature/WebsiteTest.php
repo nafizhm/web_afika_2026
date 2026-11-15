@@ -9,7 +9,7 @@ class WebsiteTest extends TestCase {
     use RefreshDatabase;
     protected function setUp(): void { parent::setUp(); $this->seed(); }
     public function test_public_site_and_property_visibility(): void {
-        $this->get('/')->assertOk()->assertSee('Afika')->assertSee('Contoh Tipe');
+        $this->get('/')->assertOk()->assertSee('Afika')->assertSee('Afika Park')->assertSee('Afika Land')->assertSee('Afika Residence')->assertDontSee('Contoh Tipe');
         $property=Property::first();
         $this->get('/properti/'.$property->id)->assertOk();
         $property->update(['is_published'=>false]);

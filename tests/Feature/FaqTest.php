@@ -33,7 +33,7 @@ class FaqTest extends TestCase
         $this->get('/admin/faq/create')->assertOk();
         $data = ['question'=>'Bagaimana cara survei?', 'answer'=>'Hubungi tim untuk membuat janji.', 'sort_order'=>2, 'is_active'=>1];
         $this->post('/admin/faq', $data)->assertSessionHasNoErrors()->assertRedirect('/admin/faq');
-        $faq = Faq::firstOrFail();
+        $faq = Faq::where('question', $data['question'])->firstOrFail();
         $this->assertTrue($faq->is_active);
         $this->get('/admin/faq/'.$faq->id.'/edit')->assertOk()->assertSee('Bagaimana cara survei?');
         $data['answer'] = 'Silakan membuat janji melalui WhatsApp.';
@@ -42,7 +42,7 @@ class FaqTest extends TestCase
         $this->assertFalse($faq->fresh()->is_active);
         $this->get('/admin/faq')->assertSee($data['answer'])->assertSee('Nonaktif');
         $this->delete('/admin/faq/'.$faq->id)->assertRedirect('/admin/faq');
-        $this->assertDatabaseCount('faqs', 0);
+        $this->assertDatabaseMissing('faqs', ['id' => $faq->id]);
     }
 
     public function test_invalid_faq_is_rejected_and_search_filters_results(): void
