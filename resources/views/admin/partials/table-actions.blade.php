@@ -1,0 +1,1 @@
+<div class="table-actions"><a class="table-edit" href="{{ $edit }}">Edit</a><form method="post" action="{{ $delete }}" onsubmit="return confirm('Hapus {{ $label }} ini?')">@csrf @method('DELETE')<button class="delete" type="submit">Hapus</button></form></div>

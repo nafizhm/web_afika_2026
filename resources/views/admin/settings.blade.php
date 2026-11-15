@@ -1,0 +1,7 @@
+@extends('layouts.admin')
+@section('title','Konten Website')
+@section('content')
+<div class="section-head"><div><span class="eyebrow">PENGATURAN WEBSITE</span><h1>Konten website</h1><p>Perbarui profil dan identitas Afika Residence.</p></div></div>
+<section class="panel" id="konten"><span class="eyebrow">PENGATURAN WEBSITE</span><h2>Konten beranda & media sosial</h2><form method="post" action="{{ route('admin.settings') }}" enctype="multipart/form-data">@csrf @method('PUT')<div class="form-grid"><label class="full">Judul utama beranda<input name="hero_title" value="{{ old('hero_title',$settings['hero_title']) }}" maxlength="150" required></label><label class="full">Deskripsi beranda<textarea name="hero_description" required rows="3" maxlength="600">{{ old('hero_description',$settings['hero_description']) }}</textarea></label><label class="full">Tentang perusahaan<textarea name="about" required rows="5">{{ old('about',$settings['about']) }}</textarea></label><label>WhatsApp (format 628xxx)<input name="whatsapp" value="{{ old('whatsapp',$settings['whatsapp']) }}" inputmode="numeric" placeholder="6281234567890"><small>Kosongkan jika belum tersedia.</small></label><label>Link Instagram<input name="instagram" type="url" value="{{ old('instagram',$settings['instagram']) }}" placeholder="https://www.instagram.com/..."></label></div><button class="button" type="submit">Simpan Konten Website ↗</button></form></section>
+
+@endsection

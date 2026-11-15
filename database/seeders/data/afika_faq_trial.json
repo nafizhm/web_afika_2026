@@ -1,0 +1,182 @@
+[
+  {
+    "question": "Siapa nama kamu?",
+    "answer": "Halo, Kak! Saya Fika, asisten AI Afika Residence. Fika bisa bantu menjelaskan pilihan rumah, harga, pembayaran, jam kantor, dan jadwal survei. Kakak sedang mencari rumah untuk ditempati atau investasi?",
+    "sort_order": 1,
+    "is_active": true
+  },
+  {
+    "question": "Apa itu Afika Residence?",
+    "answer": "Afika Residence adalah brand perumahan PT. Sahir Propertindo Niaga. Kami membantu keluarga menemukan hunian dengan pilihan tipe 36, 45, dan 60. Fika bisa bantu mulai dari memilih tipe sampai menyiapkan jadwal kunjungan.",
+    "sort_order": 2,
+    "is_active": true
+  },
+  {
+    "question": "Kapan jam operasional kantor pemasaran?",
+    "answer": "Kantor pemasaran buka Senin–Sabtu pukul 08.00–17.00 WIB dan Minggu pukul 09.00–15.00 WIB, Kak. Kunjungan pada hari libur nasional perlu janji terlebih dahulu. Sebaiknya kabari tim sebelum berangkat agar bisa didampingi saat melihat rumah.",
+    "sort_order": 3,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana cara menghubungi tim pemasaran?",
+    "answer": "Kakak bisa menghubungi WhatsApp Afika Residence di 082221992911. Pelayanan tim pemasaran mengikuti jam kantor. Kalau mengirim pesan di luar jam operasional, pesan akan ditindaklanjuti saat tim kembali bertugas.",
+    "sort_order": 4,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana cara survei lokasi?",
+    "answer": "Bisa, Kak. Survei dilayani Senin–Sabtu pukul 09.00–16.00 WIB dan Minggu pukul 09.00–14.00 WIB. Siapkan nama, hari dan jam yang diinginkan, jumlah pengunjung, serta tipe rumah yang diminati, lalu kirim melalui WhatsApp 082221992911. Jadwal baru pasti setelah dikonfirmasi tim pemasaran.",
+    "sort_order": 5,
+    "is_active": true
+  },
+  {
+    "question": "Apakah survei lokasi dikenakan biaya?",
+    "answer": "Survei lokasi dan konsultasi awal tidak dipungut biaya, Kak. Kakak dapat melihat lingkungan dan contoh rumah dengan pendampingan tim pemasaran. Transportasi menuju lokasi menjadi tanggungan pengunjung.",
+    "sort_order": 6,
+    "is_active": true
+  },
+  {
+    "question": "Di mana kantor pemasaran dan bagaimana mendapatkan titik lokasi?",
+    "answer": "Kantor pemasaran berada di area gerbang utama Afika Residence, Kak. Untuk mendapat titik Google Maps dan arahan menuju lokasi, kirim pesan ke 082221992911 dengan menyebutkan rencana hari kunjungan. Tim akan mengirimkan lokasi yang sesuai dengan proyek yang ingin dikunjungi.",
+    "sort_order": 7,
+    "is_active": true
+  },
+  {
+    "question": "Apa saja tipe rumah yang tersedia?",
+    "answer": "Ada tiga pilihan untuk kebutuhan keluarga, Kak: tipe 36/72, tipe 45/90, dan tipe 60/120. Angka pertama menunjukkan luas bangunan dan angka kedua luas tanah dalam meter persegi. Kakak lebih membutuhkan rumah ringkas atau ruang yang lebih lega?",
+    "sort_order": 8,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana spesifikasi rumah tipe 36?",
+    "answer": "Tipe 36/72 memiliki luas bangunan 36 m² dan tanah 72 m², dengan 2 kamar tidur, 1 kamar mandi, ruang keluarga, area dapur, carport 1 mobil, serta halaman depan. Pilihan ini cocok untuk pasangan atau keluarga kecil.",
+    "sort_order": 9,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana spesifikasi rumah tipe 45?",
+    "answer": "Tipe 45/90 memiliki luas bangunan 45 m² dan tanah 90 m², dengan 2 kamar tidur, 1 kamar mandi, ruang keluarga dan ruang makan, area dapur, carport 1 mobil, serta halaman belakang. Ruang tambahannya cocok untuk keluarga yang membutuhkan area berkumpul lebih nyaman.",
+    "sort_order": 10,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana spesifikasi rumah tipe 60?",
+    "answer": "Tipe 60/120 memiliki luas bangunan 60 m² dan tanah 120 m², dengan 3 kamar tidur, 2 kamar mandi, ruang keluarga, ruang makan, dapur, carport 1 mobil, serta taman depan dan belakang. Tipe ini cocok untuk keluarga yang membutuhkan lebih banyak kamar.",
+    "sort_order": 11,
+    "is_active": true
+  },
+  {
+    "question": "Berapa harga rumah di Afika Residence?",
+    "answer": "Harga penawaran mulai Rp350 juta untuk tipe 36/72, Rp450 juta untuk tipe 45/90, dan Rp650 juta untuk tipe 60/120, Kak. Harga unit dapat berbeda berdasarkan posisi dan luas tanah tambahan. Minta penawaran tertulis untuk memastikan harga akhir dan rincian biayanya.",
+    "sort_order": 12,
+    "is_active": true
+  },
+  {
+    "question": "Berapa uang muka pembelian rumah?",
+    "answer": "Untuk simulasi awal, uang muka yang digunakan adalah 20% dari harga rumah, Kak. Contohnya tipe 36 seharga Rp350 juta memiliki simulasi uang muka Rp70 juta. Nilai akhir mengikuti unit, metode pembayaran, dan persetujuan pembiayaan bank; biaya transaksi dihitung terpisah.",
+    "sort_order": 13,
+    "is_active": true
+  },
+  {
+    "question": "Apa saja metode pembayaran rumah?",
+    "answer": "Pilihan pembayarannya adalah tunai keras, tunai bertahap, dan KPR, Kak. Tunai keras menggunakan pelunasan maksimal 30 hari setelah kesepakatan, sedangkan tunai bertahap dapat disimulasikan sampai 12 bulan. Untuk KPR, skema akhir mengikuti bank dan hasil analisis pengajuan.",
+    "sort_order": 14,
+    "is_active": true
+  },
+  {
+    "question": "Apakah bisa membeli rumah melalui KPR?",
+    "answer": "Bisa mengajukan pembelian melalui KPR, Kak. Tim pemasaran membantu menyiapkan data unit dan kebutuhan dokumen pengajuan, sementara keputusan kredit sepenuhnya berada pada bank. Pilihan bank, bunga, tenor, dan biaya perlu dikonfirmasi dalam penawaran bank sebelum Kakak menentukan pilihan.",
+    "sort_order": 15,
+    "is_active": true
+  },
+  {
+    "question": "Dokumen apa yang perlu disiapkan untuk pengajuan KPR?",
+    "answer": "Untuk persiapan awal, siapkan KTP, KK, NPWP bila diminta, dokumen status perkawinan, rekening koran 3 bulan terakhir, dan bukti penghasilan. Untuk karyawan biasanya diperlukan slip gaji dan surat keterangan kerja; untuk pelaku usaha, dokumen usaha dan catatan keuangan. Bank dapat meminta dokumen tambahan sesuai kondisi pemohon.",
+    "sort_order": 16,
+    "is_active": true
+  },
+  {
+    "question": "Apakah ada simulasi cicilan KPR?",
+    "answer": "Tim dapat membantu membuat simulasi berdasarkan harga unit, uang muka, dan tenor yang diinginkan, Kak. Kirim tipe rumah pilihan, perkiraan uang muka, dan tenor 10, 15, atau 20 tahun untuk bahan simulasi. Angka cicilan final harus mengacu pada penawaran bunga serta persetujuan bank, bukan perkiraan Fika.",
+    "sort_order": 17,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana cara memesan rumah?",
+    "answer": "Langkahnya: pilih tipe rumah, jadwalkan survei, tentukan unit bersama tim, lalu minta penawaran dan ketentuan booking tertulis. Setelah setuju, pembayaran dilakukan ke rekening resmi perusahaan dan bukti pembayaran disimpan. Tim kemudian menyiapkan dokumen pemesanan dan jadwal pembayaran berikutnya.",
+    "sort_order": 18,
+    "is_active": true
+  },
+  {
+    "question": "Berapa booking fee untuk memesan unit?",
+    "answer": "Booking fee untuk tahap pemesanan adalah Rp5 juta per unit, Kak. Pembayaran dilakukan setelah unit dan ketentuan tertulis dikonfirmasi tim. Minta bukti pembayaran resmi serta penjelasan apakah booking fee diperhitungkan sebagai bagian dari harga rumah.",
+    "sort_order": 19,
+    "is_active": true
+  },
+  {
+    "question": "Apakah booking fee bisa dikembalikan jika pembelian dibatalkan?",
+    "answer": "Ketentuan pengembalian mengikuti formulir pemesanan yang disepakati, Kak. Sebelum membayar, minta penjelasan tertulis tentang pembatalan oleh pembeli, pengajuan KPR yang ditolak, batas waktu pengajuan, dan potongan biaya bila ada. Fika tidak bisa menjanjikan pengembalian di luar dokumen tersebut.",
+    "sort_order": 20,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana cara mengetahui ketersediaan unit?",
+    "answer": "Ketersediaan unit diperiksa langsung oleh tim pemasaran, Kak, karena unit dapat berubah dari tersedia menjadi dipesan. Sampaikan tipe yang diminati dan preferensi posisi, misalnya dekat gerbang atau unit pojok. Jangan melakukan pembayaran sebelum tim mengonfirmasi nomor unit dan statusnya.",
+    "sort_order": 21,
+    "is_active": true
+  },
+  {
+    "question": "Apakah bisa memilih unit pojok atau tanah lebih luas?",
+    "answer": "Bisa mengajukan pilihan unit pojok atau tanah tambahan jika masih tersedia, Kak. Posisi dan luas tambahan dapat memengaruhi harga akhir. Tim akan menyiapkan rincian luas, harga, dan denah unit yang dipilih sebelum pemesanan.",
+    "sort_order": 22,
+    "is_active": true
+  },
+  {
+    "question": "Fasilitas apa saja yang tersedia di lingkungan perumahan?",
+    "answer": "Konsep fasilitas lingkungan meliputi gerbang kawasan, jalan lingkungan, saluran drainase, penerangan jalan, dan area hijau, Kak. Saat survei, tim akan menunjukkan fasilitas yang sudah selesai dan menjelaskan fasilitas yang masih dalam pengerjaan. Status fasilitas perlu dicantumkan dalam penawaran proyek yang dipilih.",
+    "sort_order": 23,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana sistem keamanan lingkungan?",
+    "answer": "Pengaturan akses masuk kawasan menggunakan gerbang utama dengan pengawasan petugas, Kak. Saat survei, tanyakan jam penjagaan, tata tertib tamu, dan pengaturan keamanan yang berlaku pada blok pilihan. Biaya serta layanan keamanan mengikuti pengelolaan lingkungan.",
+    "sort_order": 24,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana spesifikasi material bangunan rumah?",
+    "answer": "Spesifikasi contoh rumah menggunakan pondasi batu kali, struktur beton bertulang, dinding bata ringan, rangka atap baja ringan, penutup atap genteng beton, lantai granit 60 × 60 cm, dan kusen aluminium. Spesifikasi yang mengikat adalah lampiran teknis unit pada perjanjian, jadi pastikan diperiksa sebelum transaksi.",
+    "sort_order": 25,
+    "is_active": true
+  },
+  {
+    "question": "Berapa daya listrik dan bagaimana sumber air rumah?",
+    "answer": "Untuk spesifikasi contoh, tipe 36 dan 45 menggunakan daya listrik 1.300 VA, sedangkan tipe 60 menggunakan 2.200 VA. Sumber air menggunakan jaringan air kawasan. Detail sambungan, meter, biaya pemakaian, dan kemungkinan peningkatan daya dikonfirmasi sesuai unit yang dipilih.",
+    "sort_order": 26,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana memeriksa legalitas tanah dan bangunan?",
+    "answer": "Sebelum transaksi, minta penjelasan status hak tanah, dokumen perizinan bangunan yang relevan, dan alur dokumen jual beli unit. Pemeriksaan dapat dikoordinasikan dengan tim dan notaris/PPAT yang menangani. Fika tidak menyatakan suatu unit sudah bersertifikat tertentu tanpa data dokumen unit yang dikonfirmasi.",
+    "sort_order": 27,
+    "is_active": true
+  },
+  {
+    "question": "Biaya apa saja yang perlu diperhitungkan selain harga rumah?",
+    "answer": "Minta rincian tertulis untuk pajak pembeli, jasa notaris/PPAT, pengurusan dokumen, sambungan utilitas, dan biaya lingkungan, Kak. Jika menggunakan KPR, tanyakan juga biaya administrasi, provisi, appraisal, serta asuransi yang ditawarkan bank. Komponen yang ditanggung developer harus dinyatakan jelas dalam penawaran.",
+    "sort_order": 28,
+    "is_active": true
+  },
+  {
+    "question": "Kapan rumah dapat diserahterimakan?",
+    "answer": "Untuk unit siap huni, target penjadwalan serah terima adalah 30 hari kerja setelah pembayaran, dokumen, dan kewajiban kedua pihak dinyatakan lengkap. Untuk unit inden, simulasi masa pembangunan adalah 6 bulan sejak syarat mulai bangun terpenuhi. Jadwal yang berlaku tetap mengikuti perjanjian unit dan progres yang dikonfirmasi tim.",
+    "sort_order": 29,
+    "is_active": true
+  },
+  {
+    "question": "Bagaimana layanan purnajual dan pengaduan kerusakan?",
+    "answer": "Pada contoh program purnajual, masa pemeliharaan adalah 90 hari kalender sejak berita acara serah terima ditandatangani. Pengaduan dikirim melalui 082221992911 dengan nomor unit, uraian masalah, foto, dan waktu yang bisa dikunjungi. Cakupan pekerjaan, pengecualian, serta jadwal penanganan mengikuti ketentuan pemeliharaan dalam perjanjian.",
+    "sort_order": 30,
+    "is_active": true
+  }
+]

@@ -1,0 +1,3 @@
+<div class="table-wrap"><table class="admin-table" data-table-kind="properties" data-source="{{ route('admin.tables','properties') }}"><thead><tr><th>Properti</th><th>Lokasi</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
+@foreach($properties as $property)<tr><td>{{ $property->name }}</td><td>{{ $property->location }}</td><td>{{ $property->price ? 'Rp '.number_format($property->price,0,',','.') : 'Belum diisi' }}</td><td>{{ $property->is_published ? 'Tayang' : 'Draft' }}</td><td>@include('admin.partials.table-actions',['edit'=>route('admin.property.edit',$property),'delete'=>route('admin.property.destroy',$property),'label'=>'properti'])</td></tr>@endforeach
+</tbody></table></div>
