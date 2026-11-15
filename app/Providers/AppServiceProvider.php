@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Resolve after bootstrap/app.php selects the hosting document root.
+        // A cached config generated through CLI may contain a different public path.
+        config(['filesystems.disks.public.root' => public_path('storage')]);
     }
 }

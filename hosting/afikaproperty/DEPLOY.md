@@ -1,4 +1,4 @@
-﻿# Deploy Afika Property: website + webhook + one database
+# Deploy Afika Property: website + webhook + one database
 
 1. Activate domain afikaproperty.com and SSL on hosting. Use HTTPS (worker requires it).
 2. Pull the updated repository. Set domain document root to <Laravel project>/public. Keep .env, vendor and storage above the public document root. Do not move only index.php; the webhook resolves .env from the parent of public.
@@ -7,12 +7,11 @@
    composer install --no-dev --optimize-autoloader
    php artisan migrate --force
    php artisan db:seed --class=AssistantFaqSeeder --force
-   php artisan storage:link
    php artisan optimize:clear
    php artisan config:cache
    php artisan view:cache
    Do not use migrate:fresh, rollback, or DatabaseSeeder on existing hosting data.
-5. Transfer storage/app/public images/logo from the previous hosting. Ensure storage and bootstrap/cache are writable by hosting PHP.
+5. Copy the previous storage/app/public images/logo into public_html/storage (a regular writable directory; see PUBLIC_UPLOADS.md). Ensure storage and bootstrap/cache are writable by hosting PHP.
 6. Check https://afikaproperty.com/ and /admin. GET /wa-webhook-test.php should return ok; this does not verify MySQL. The public/wa-webhook-config.php file reads DB_* and worker config directly from the same Laravel .env; do not put credentials in tracked files.
 7. On VPS, update the actual incomingCallbackUrl of Baileys session cobadong to https://afikaproperty.com/wa-webhook-test.php using your existing session configuration method. Keep incomingCallbackHeaders consistent with WHATSAPP_WEBHOOK_SECRET. Do not use /webhooks/whatsapp for AI; that legacy receiver only stores messages.
 8. Update AFIKA_WEBHOOK_URL=https://afikaproperty.com/wa-webhook-test.php in the worker's .env.afika-ai. Preserve token, model and API key. Copy the updated integrations/baileys/afika-ai-worker.mjs to the worker's current script path on VPS and run:
