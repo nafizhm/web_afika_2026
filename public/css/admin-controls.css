@@ -33,3 +33,5 @@ html[data-theme=dark] .admin-app select{color-scheme:dark}
 .admin-app .faq-form-bottom .check input{width:18px;height:18px;margin:0}
 .admin-app .faq-form-actions{display:flex;align-items:center;gap:24px;border-top:1px solid var(--select-line);padding-top:22px;margin:0}
 @media(max-width:700px){.admin-app .faq-form-options{grid-template-columns:1fr;gap:20px}.admin-app .faq-category-filter{padding:12px}.admin-app .faq-category-filter label{width:100%}.admin-app .faq-form-actions{flex-wrap:wrap}.admin-app .faq-edit-form{gap:20px}}
+
+.admin-type-menu{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}.admin-type-editor{scroll-margin-top:100px}.admin-type-editor:target{outline:2px solid var(--select-focus);outline-offset:3px}

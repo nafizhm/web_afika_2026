@@ -19,7 +19,8 @@ $property ??= new Property; unset($data['image']);
 if ($property->house_types && $r->has('house_types')) {
     $types = $r->validate([
         'house_types'=>'required|array|min:1|max:10',
-        'house_types.*.type'=>'required|integer|min:1|max:10000',
+        'house_types.*.type'=>'required|integer|distinct|min:1|max:10000',
+        'house_types.*.description'=>'nullable|string|max:20000',
         'house_types.*.available'=>'required|boolean',
         'house_types.*.cash_price'=>'nullable|integer|min:0|max:999999999999',
         'house_types.*.down_payment'=>'nullable|integer|min:0|max:999999999999',
@@ -48,6 +49,11 @@ if ($property->house_types && $r->has('house_types')) {
         }
     }
     unset($type);
+    foreach ($types as $index => $type) {
+        if (isset($type['normal_down_payment']) !== isset($type['normal_contract_fee'])) {
+            throw \Illuminate\Validation\ValidationException::withMessages(["house_types.$index.normal_down_payment"=>'Lengkapi DP normal dan biaya akad normal, atau kosongkan keduanya.']);
+        }
+    }
     $data['house_types'] = $types;
     $data['price'] = collect($types)->where('available', true)->min('cash_price');
 }

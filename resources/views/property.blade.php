@@ -1,5 +1,5 @@
 @extends('layouts.public')
-@section('title', $property->name.' | '.$settings['brand_name'])
+@section('title', $property->name.(isset($selectedType) ? ' Tipe '.$selectedType['type'] : '').' | '.$settings['brand_name'])
 @section('content')
 @php
 $photo = $property->image ? $property->imageUrl() : (preg_match('~^https?://~', $settings['hero_image'] ?? '') ? $settings['hero_image'] : asset($settings['hero_image'] ?: 'images/residence.svg'));
@@ -8,15 +8,18 @@ $number = $settings->get('whatsapp') ?: config('whatsapp.number');
 @endphp
 <section class="container section housing-detail">
 <a class="estate-link" href="{{ route('home') }}#hunian">&larr; {{ $settings['detail_back'] }}</a>
-<div class="housing-heading"><span class="estate-kicker">HUNIAN AFIKA / KENDARI</span><h1>{{ $property->name }}</h1><p>{{ $property->location }}</p></div>
+<div class="housing-heading"><span class="estate-kicker">HUNIAN AFIKA / KENDARI</span><h1>{{ $property->name }}@isset($selectedType) <span>Tipe {{ $selectedType['type'] }}</span>@endisset</h1><p>{{ $property->location }}</p></div>
 <figure class="housing-cover"><img src="{{ $photo }}" alt="{{ $property->image ? $property->name : 'Foto sementara sebagai inspirasi hunian' }}">@unless($property->image)<figcaption>Foto sementara sebagai inspirasi hunian. Dokumentasi perumahan akan diperbarui.</figcaption>@endunless</figure>
 <p class="preserve">{{ $property->description }}</p>
 @if($property->house_types)
+<nav class="housing-type-tags" aria-label="Pilihan tipe {{ $property->name }}">@foreach($property->house_types as $item)<a href="{{ route('property.type',['property'=>$property,'type'=>$item['type']]) }}" @if(isset($selectedType) && $selectedType['type']==$item['type']) aria-current="page" @endif>Tipe {{ $item['type'] }}</a>@endforeach</nav>
+@auth<a class="estate-link" href="{{ route('admin.property.edit',$property) }}#{{ isset($selectedType) ? 'tipe-'.$selectedType['type'] : 'tipe-rumah' }}">Edit detail {{ isset($selectedType) ? 'tipe '.$selectedType['type'] : 'tipe rumah' }}</a>@endauth
 <div class="housing-heading"><span class="estate-kicker">PILIHAN TIPE & PEMBAYARAN</span><h2>Rumah yang sesuai<br>untuk rencana Anda.</h2></div>
-<div class="housing-types">
-@foreach($property->house_types as $type)
+<div class="housing-types {{ isset($selectedType) ? 'housing-types-single' : '' }}">
+@foreach(isset($selectedType) ? [$selectedType] : $property->house_types as $type)
 <article class="housing-type-card">
 <div class="housing-type-top"><h3>Tipe {{ $type['type'] }}</h3><span>{{ $type['available'] ? 'Pilihan hunian' : 'Tidak tersedia' }}</span></div>
+@if(!empty($type['description']))<p class="preserve">{{ $type['description'] }}</p>@endif
 @if($type['available'])
 <div class="housing-cash"><small>HARGA CASH</small><strong>{{ $money($type['cash_price']) }}</strong></div>
 @if(isset($type['normal_down_payment']))<p class="housing-normal">Kredit normal: DP {{ $money($type['normal_down_payment']) }} · Biaya akad {{ $money($type['normal_contract_fee']) }}</p>@endif

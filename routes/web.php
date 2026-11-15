@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WebsiteController,AdminController};
 Route::get('/',[WebsiteController::class,'index'])->name('home');
 Route::get('/properti/{property}',[WebsiteController::class,'show'])->name('property.show');
+Route::get('/properti/{property}/tipe/{type}',[WebsiteController::class,'showType'])->whereNumber('type')->name('property.type');
 Route::get('/admin/login',[AdminController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminController::class,'authenticate'])->middleware('throttle:5,1')->name('login.submit');
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {

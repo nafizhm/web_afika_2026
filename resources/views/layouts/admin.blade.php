@@ -4,9 +4,9 @@
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('afika.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.sidebarHidden=localStorage.getItem('afika.sidebar-hidden')||'false'}catch(e){document.documentElement.dataset.theme='light'}</script>
 @php($companyProfile = \App\Models\Setting::pluck('value','key'))
 @if($companyProfile->get('favicon'))<link rel="icon" href="{{ asset('storage/'.$companyProfile['favicon']) }}">@endif
-<link rel="stylesheet" href="{{ asset('css/site.css') }}"><link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.min.css') }}"><link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ (is_file(public_path('css/admin.css')) ? filemtime(public_path('css/admin.css')) : '1') }}">
-<link rel="stylesheet" href="{{ asset('css/admin-theme.css') }}?v={{ (is_file(public_path('css/admin-theme.css')) ? filemtime(public_path('css/admin-theme.css')) : '1') }}">
-<link rel="stylesheet" href="{{ asset('css/admin-controls.css') }}?v={{ is_file(public_path('css/admin-controls.css')) ? filemtime(public_path('css/admin-controls.css')) : 1 }}">
+<link rel="stylesheet" href="{{ asset('css/site.css') }}"><link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.min.css') }}"><link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ (is_file(public_path('css/admin.css')) ? substr(hash_file('sha256', public_path('css/admin.css')), 0, 12) : '1') }}">
+<link rel="stylesheet" href="{{ asset('css/admin-theme.css') }}?v={{ (is_file(public_path('css/admin-theme.css')) ? substr(hash_file('sha256', public_path('css/admin-theme.css')), 0, 12) : '1') }}">
+<link rel="stylesheet" href="{{ asset('css/admin-controls.css') }}?v={{ is_file(public_path('css/admin-controls.css')) ? substr(hash_file('sha256', public_path('css/admin-controls.css')), 0, 12) : 1 }}">
 <script defer src="{{ asset('vendor/datatables/jquery.min.js') }}"></script><script defer src="{{ asset('vendor/datatables/dataTables.min.js') }}"></script><script defer src="{{ asset('js/admin.js') }}?v={{ (is_file(public_path('js/admin.js')) ? filemtime(public_path('js/admin.js')) : '1') }}"></script>
 </head>
 <body class="admin-body @auth admin-app @else admin-login @endauth">
