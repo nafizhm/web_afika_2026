@@ -1,0 +1,17 @@
+﻿/* Shared select controls across every admin screen, including DataTables. */
+.admin-app{--select-bg:#fff;--select-ink:#243c31;--select-line:#dce5df;--select-hover:#eef5f0;--select-focus:#769d84;--select-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364786c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+html[data-theme=dark] .admin-app{--select-bg:#17272e;--select-ink:#dce7e0;--select-line:#3b5047;--select-hover:#294d3a;--select-focus:#91b79b;--select-arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bdd1c3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+.admin-app select:not([multiple]),.admin-app .dt-container select.dt-input{display:block;width:100%;max-width:100%;min-height:46px;margin:8px 0 0;padding:11px 42px 11px 14px;font:inherit;font-size:15px;font-weight:400;line-height:1.5;color:var(--select-ink);background-color:var(--select-bg);background-image:var(--select-arrow);background-size:18px;background-repeat:no-repeat;background-position:right 13px center;border:1px solid var(--select-line);border-radius:7px;appearance:none;cursor:pointer;box-shadow:none;transition:border-color .15s,box-shadow .15s}
+.admin-app select:hover{border-color:var(--select-focus)}.admin-app select:focus-visible{outline:2px solid var(--select-focus);outline-offset:2px}.admin-app select:disabled{opacity:.55;cursor:not-allowed}.admin-app select option{background:var(--select-bg);color:var(--select-ink);font:inherit;padding:10px 14px}.admin-app .dt-container .dt-length{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.admin-app .dt-container .dt-length select.dt-input{display:inline-block;width:auto;min-width:78px;min-height:40px;margin:0;padding:8px 35px 8px 12px;font-size:14px}.admin-app .dt-container .dt-length label{font-weight:400;font-size:14px;margin:0;display:inline-flex;align-items:center;gap:9px}.admin-app label:has(>select){display:block}
+html[data-theme=dark] .admin-app select{color-scheme:dark}
+/* Browsers with customizable native selects can style the popup as well. */
+@supports(appearance:base-select){
+ .admin-app select:not([multiple]),.admin-app select:not([multiple])::picker(select){appearance:base-select}
+ .admin-app select:not([multiple]){background-image:none}
+ .admin-app select::picker-icon{color:var(--select-ink);transition:rotate .15s}
+ .admin-app select:open::picker-icon{rotate:180deg}
+ .admin-app select::picker(select){background:var(--select-bg);color:var(--select-ink);border:1px solid var(--select-line);border-radius:9px;padding:5px;box-shadow:0 12px 30px #10291f24;max-height:300px;overflow:auto}
+ .admin-app select option{border-radius:5px;min-height:38px;padding:9px 12px;cursor:pointer}
+ .admin-app select option:hover,.admin-app select option:focus,.admin-app select option:checked{background:var(--select-hover);color:var(--select-ink)}
+}
+@media(max-width:700px){.admin-app select:not([multiple]){font-size:16px}.admin-app .dt-container .dt-length select.dt-input{font-size:16px}}
