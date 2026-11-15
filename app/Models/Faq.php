@@ -11,11 +11,16 @@ class Faq extends Model
     public function scopeAudience($query, string $audience)
     {
         return match ($audience) {
-            'ai' => $query->where(fn($q) => $q->where('is_public', false)->orWhere('faq_type','!=','general')),
+            'ai' => $query->where('is_ai', true)->where(fn($q) => $q->where('is_public', false)->orWhere('faq_type','!=','general')),
             'web' => $query->where('faq_type','general')->where('is_public',true)->where('is_ai',false),
             'both' => $query->where('faq_type','general')->where('is_public',true)->where('is_ai',true),
             default => $query,
         };
+    }
+
+    public function scopeForWebsite($query)
+    {
+        return $query->where('is_active', true)->where('faq_type', 'general')->where('is_public', true);
     }
 
     protected function casts(): array

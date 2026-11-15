@@ -15,3 +15,21 @@ html[data-theme=dark] .admin-app select{color-scheme:dark}
  .admin-app select option:hover,.admin-app select option:focus,.admin-app select option:checked{background:var(--select-hover);color:var(--select-ink)}
 }
 @media(max-width:700px){.admin-app select:not([multiple]){font-size:16px}.admin-app .dt-container .dt-length select.dt-input{font-size:16px}}
+/* FAQ controls and editing layout */
+.admin-app .faq-category-filter{padding:16px 18px;background:var(--admin-bg);border:1px solid var(--select-line);border-radius:10px;align-items:center;gap:16px}
+.admin-app .faq-category-filter label{width:320px;font-size:13px;font-weight:600}
+.admin-app .faq-type-select{background-color:var(--select-bg);color:var(--select-ink);border-color:var(--select-line)}
+.admin-app .faq-editor{max-width:1000px;margin-top:22px}
+.admin-app .faq-form-intro,.admin-app .faq-field-help{color:var(--admin-muted,#718078);font-size:14px;line-height:1.7}
+.admin-app .faq-edit-form{display:grid;gap:22px}
+.admin-app .faq-form-options{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.admin-app .faq-edit-form label{margin:0;font-size:14px;font-weight:600;min-width:0}
+.admin-app .faq-edit-form textarea{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:14px 16px;line-height:1.8;resize:vertical;border:1px solid var(--select-line);border-radius:8px;font:inherit}
+.admin-app .faq-edit-form #answer{min-height:240px}
+.admin-app .faq-field-help{margin:0;padding:14px 16px;border-left:3px solid var(--select-focus);background:var(--select-hover);border-radius:4px}
+.admin-app .faq-form-bottom{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.admin-app .faq-form-bottom .faq-order{width:180px}
+.admin-app .faq-form-bottom .check{display:flex;align-items:center;gap:10px}
+.admin-app .faq-form-bottom .check input{width:18px;height:18px;margin:0}
+.admin-app .faq-form-actions{display:flex;align-items:center;gap:24px;border-top:1px solid var(--select-line);padding-top:22px;margin:0}
+@media(max-width:700px){.admin-app .faq-form-options{grid-template-columns:1fr;gap:20px}.admin-app .faq-category-filter{padding:12px}.admin-app .faq-category-filter label{width:100%}.admin-app .faq-form-actions{flex-wrap:wrap}.admin-app .faq-edit-form{gap:20px}}

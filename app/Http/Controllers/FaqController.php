@@ -48,15 +48,20 @@ class FaqController extends Controller
             'faq_type'=>'sometimes|required|in:general,identity,handoff',
             'is_public'=>'sometimes|required|boolean',
             'audience'=>'sometimes|required|in:ai,web,both',
-            'faq_type'=>'sometimes|required|in:general,identity,handoff',
-            'is_public'=>'sometimes|required|boolean',
-            'audience'=>'sometimes|required|in:ai,web,both',
             'question' => 'required|string|max:500',
             'answer' => 'required|string|max:20000',
             'sort_order' => 'required|integer|min:0|max:999999',
             'is_active' => 'required|boolean',
         ]);
-        if (($data['faq_type'] ?? 'general') !== 'general') $data['is_public'] = false;
+        if (isset($data['audience'])) {
+            $data['is_public'] = in_array($data['audience'], ['web', 'both'], true);
+            $data['is_ai'] = in_array($data['audience'], ['ai', 'both'], true);
+        }
+        unset($data['audience']);
+        if (($data['faq_type'] ?? $request->route('faq')?->faq_type ?? 'general') !== 'general') {
+            $data['is_public'] = false;
+            $data['is_ai'] = true;
+        }
         if (($data['faq_type'] ?? '') === 'identity' && mb_strlen($data['answer']) > 60) {
             throw \Illuminate\Validation\ValidationException::withMessages(['answer'=>'Isi nama asisten saja, maksimal 60 karakter.']);
         }
